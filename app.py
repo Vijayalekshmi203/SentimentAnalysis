@@ -31,7 +31,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('landing.html')
+    return render_template('index.html')
 
 
 @app.route('/predict', methods=['POST'])
@@ -145,6 +145,7 @@ def get_distribution_graph(data):
     plt.close()
 
     return graph
+
 
 
 
