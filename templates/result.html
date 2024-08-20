@@ -1,0 +1,157 @@
+{% if text_result %}
+    <div class="container">
+        <div class="row">
+
+            <div class="text_summary col-12">
+
+                <div class="col-lg-6 col-md-12 col-6 my-3">
+                    <h5>Overall Sentiment Score of the Text: {{ text_result['score'] }}</h5>
+                </div>
+                <div class="col-lg-6 col-md-12 col-6 my-3">
+                    <h5>Overall Sentiment of the Text: {{ text_result['sentiment'] }}</h5>
+                </div>
+            </div>
+
+            {% if text_result.translation %}
+            <p><strong>Translation:</strong> {{ text_result.translation }}</p>
+            {% endif %}
+            
+            <!--{% if translation_limit_message %}
+            <p><strong>{{ translation_limit_message }}</strong></p>
+            {% endif %}-->
+
+            <div class="wordclouds col-12 my-3 mb-5">
+                <div class="cloud_img text-center">
+                    {% if wordcloud_text_img_base64 %}
+                    <img src="data:image/png;base64,{{ wordcloud_text_img_base64 }}" alt="Word Cloud" class="img-fluid"/>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="senti_dist">
+                
+                {% if sentiment_distribution_result %}
+                    <div class="score_details">
+                        <div class="score_title" text-center>
+                            <h3>Sentiment Score Distribution</h3>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class = "table table-striped" border="1" cellpadding="10" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Sentence</th>
+                                        <th>Sentence Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for sentence, score in sentiment_distribution_result.scores %}
+                                    <tr>
+                                        <td>{{ sentence }}</td>
+                                        <td>{{ score }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    
+                    <div class="sent_details">
+                        <div class="sent_title" text-center>
+                            <h3>Sentiment Distribution</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped"m border="1" cellpadding="10" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Sentence</th>
+                                        <th>Sentiment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for sentence, label in sentiment_distribution_result.labels %}
+                                    <tr>
+                                        <td>{{ sentence }}</td>
+                                        <td>{{  label }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    
+                {% endif %}
+            </div>            
+        </div>
+    </div>
+    
+    
+
+{% elif file_result %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-md-12 col-12 my-3">
+                <div class="score_plot">
+                    {% if plot_score_base64 %}
+                    <img src="data:image/png;base64,{{ plot_score_base64 }}" alt="Score Distribution Plot" class="img-fluid" />
+                    {% endif %} 
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-12 my-3">
+                <div class="senti_plot">
+                    {% if plot_img_base64 %}
+                    <img src="data:image/png;base64,{{ plot_img_base64 }}" alt="Sentiment Distribution Plot" class="img-fluid" />
+                    {% endif %} 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="wordclouds col-12 my-3 mb-5">
+                <h5>Word Cloud of the Reviews</h5>
+                <div class="cloud_img text-center">
+                    {% if wordclouds_file_img_base64 %}
+                    <img src="data:image/png;base64,{{ wordclouds_file_img_base64 }}" alt="Word Cloud" class="img-fluid"/>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <p>CSV file processed. 
+    <!--<a href="{{ url_for('download_csv', csv_content=file_result['csv_content']) }}">Download the results</a>-->
+    <a href="/download_csv?csv_content={{ file_result['csv_content'] }}", download="results.csv">Download the Result</a>
+    </p>
+    <div class="table_preview">
+        <p>Preview of the Processed File:</p>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        {% for col in file_result['columns'] %}
+                            <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in file_result['rows'] %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    
+{% endif %}

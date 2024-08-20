@@ -73,7 +73,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="each_slide">
+				<!--<div class="each_slide">
 					<div class="row">
 						<div class="col-lg-7 col-md-12 col-12 my-3">
 							<div class="slide_img">
@@ -87,6 +87,7 @@
 						</div>
 					</div>
 				</div>
+			-->
 			</div>
 		</div>
 	</section>
@@ -119,20 +120,36 @@
 				</div>
 				<div class="col-xl-6 col-lg-8 col-md-12 col-12 text-center m-auto" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-duration="1000" data-aos-offset="300">
 					<div class="form_sec">
-						<form action="">
-							<p>Upload your CSV file</p>
+						<form action="/predict" method="POST" enctype="multipart/form-data">
+							<p style="text-align: left;">Upload your CSV file</p>
 							<div class="input-group mb-3">
-								<input type="file" class="form-control" id="translate_file" accept=".csv">
+								<input type="file" class="form-control" name="file_input" id="file_input" accept=".csv">
 							</div>
-							<p>Type your Text</p>
-							<textarea name="" id="translate_txt" class="form-control mb-3" rows="4"></textarea>
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<p style="text-align: left;">Type your Text</p>
+							<textarea name="text_input" id="translate_txt" class="form-control mb-3" rows="7" placeholder="Enter up to 500 characters..."></textarea>
+							<button type="submit" class="btn btn-primary">Predict</button>
+							<button type="button" class="btn btn-secondary" onclick="clearForm()">Clear</button>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<section id="result_sec" class="container-fluid py-5" style="display:none;">
+		<div class="container">
+			<div class="row">
+				<div class="col-12" data-aos="fade-down" data-aos-easing="ease-out-back" data-aos-duration="1000" data-aos-offset="100">
+					<div class="result_title text-center">
+						<h2>Prediction Result</h2>
+					</div>
+				</div>
+				<div class="col-12" id="result_container" data-aos="fade-up" data-aos-easing="ease-out-back" data-aos-duration="1000" data-aos-offset="100">
+					<!-- Result will be injected here -->
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<footer id="site-footer" class="text-center">
 		<div class="copy_content py-3">
 			<p class="m-0"><span>&copy; </span> <span id="copy_year"></span><span> Text Sentiment Prediction. All Rights Reserved</span></p>
