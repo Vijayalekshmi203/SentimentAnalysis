@@ -84,16 +84,42 @@ section#abt_sec .abt_img_wrap img {
 	object-fit: cover;
 	object-position: center;
 }
-section#prediction_sec {
+section#prediction_sec,
+section#result_sec {
 	background-color: #fafafa;
 }
 section#prediction_sec .sent_title h3 {
 	font-size: 32px;
 	font-weight: 700;
-	color: #000;
+	color: #4694d6;
 }
 section#prediction_sec .form_sec {
 	padding-top: 30px;
+}
+
+#word_count {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+
+section#result_sec .result_title h2 {
+	font-size: 32px;
+	font-weight: 700;
+	color: #000;
+}
+section#result_sec .wordclouds h5,
+.text_summary h5 {
+	font-size: 21px;
+	font-weight: 700;
+	color: #000;
+	padding-bottom: 20px;
+}
+
+section#result_sec .senti_dist h3{
+	color:#4694d6;
+	padding-bottom: 5px;
+	padding-top: 20px;
 }
 
 footer#site-footer {

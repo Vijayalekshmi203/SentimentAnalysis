@@ -64,3 +64,51 @@ $(function(){
 $(window).on('load', function () {
 	AOS.refresh();
 });
+
+
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const formData = new FormData(this);
+    fetch('/predict', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('result_container').innerHTML = data;
+        document.getElementById('result_sec').style.display = 'block';
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+// To find the word count of the text input in the form
+function countWords() {
+    const textarea = document.getElementById('translate_txt');
+    const wordCountDisplay = document.getElementById('word_count');
+    const submitButton = document.getElementById('submit_btn');
+    
+    const words = textarea.value.trim().split(/\s+/).filter(word => word.length > 0);
+    const wordCount = words.length;
+
+    wordCountDisplay.textContent = `${wordCount} / 500 words`;
+
+    if (wordCount > 500) {
+        wordCountDisplay.style.color = 'red';
+        submitButton.disabled = true;
+    } else {
+        wordCountDisplay.style.color = 'black';
+        submitButton.disabled = false;
+    }
+}
+
+//To clear the form
+function clearForm() {
+	// Clear the file input
+	document.getElementById('file_input').value = '';
+	
+	// Clear the text area
+	document.getElementById('translate_txt').value = '';
+}
+
