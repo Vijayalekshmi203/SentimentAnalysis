@@ -16,7 +16,7 @@ class SentimentAlgorithm:
     def __init__(self):
         self.custom_lexicon = {
             # Positive sentiment words
-            "good": 2,
+            "good": 2, 
             "nice":2,
             "happy": 3,
             "Big":3,
@@ -25,6 +25,7 @@ class SentimentAlgorithm:
             "great": 4,
             "fantastic": 4,
             "love": 4,
+            "fun":4,
             "joyful":4,
             "congratulation":4,
             "delightful": 4,
@@ -72,6 +73,8 @@ class SentimentAlgorithm:
             "slightly": 0.10,
             "somewhat": 0.10,
             "unlimited":0.75,
+            "lot":0.55,
+            "well":0.45,
             "normal":0.5,
             "new":0.55,
             "true": 0.8, "truly":0.8,
@@ -165,37 +168,7 @@ class SentimentAlgorithm:
         else:
             raise ValueError("Input data must be a pandas DataFrame or a string representing a paragraph.")
 
-    '''def calculate_sentiment(self, text):
-        words = self.preprocess(text)
-        score = 0
-        i = 0
-        
-        while i < len(words):
-            word = words[i]
-            if word in self.custom_lexicon:
-                current_score = self.custom_lexicon[word]
-                
-                # Check for modifiers or negations before the sentiment word
-                if i > 0:
-                    prev_word = words[i-1]
-                    if prev_word in self.custom_negations:
-                        current_score *= self.custom_negations[prev_word]
-                    elif prev_word in self.custom_amplifiers:
-                        current_score *= self.custom_amplifiers[prev_word]
-                    
-                    # Handle the case where negation and amplifier are combined
-                    if i > 1:
-                        prev_prev_word = words[i-2]
-                        if prev_prev_word in self.custom_negations:
-                            current_score *= self.custom_negations[prev_prev_word]
-                            
-                        elif prev_prev_word in self.custom_amplifiers:
-                            current_score *= self.custom_amplifiers[prev_prev_word]
-                            
-                score += current_score
-            i += 1
-        
-        return score'''
+
     def calculate_sentiment(self, text):
         words = self.preprocess(text)
         score = 0
