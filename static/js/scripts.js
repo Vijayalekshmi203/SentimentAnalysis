@@ -111,4 +111,3 @@ function clearForm() {
 	// Clear the text area
 	document.getElementById('translate_txt').value = '';
 }
-
