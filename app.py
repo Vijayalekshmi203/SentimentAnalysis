@@ -1,4 +1,4 @@
-from flask import Flask,render_template, request, send_file
+from flask import Flask,render_template, request, send_file , session
 from flask import Flask, render_template, request, send_file
 import pandas as pd
 from io import StringIO
@@ -95,7 +95,7 @@ def predict():
                              translation_limit_message=translation_limit_message)
         
 
-@app.route('/download_csv')
+@app.route('/download_csv', methods=['GET'])
 def download_csv():
     csv_content = request.args.get('csv_content')
     if not csv_content:
