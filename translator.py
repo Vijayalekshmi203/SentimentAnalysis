@@ -149,8 +149,9 @@ def translate_text(text):
     return translation
 
 
-
+'''
 def detect_lang(text):
     detected_language = detect(text)
     if detected_language == "en-GB":
         
+'''
